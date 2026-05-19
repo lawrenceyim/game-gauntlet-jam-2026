@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://rpbesf1l1me5"]
+
+[ext_resource type="Texture2D" uid="uid://cm207jvh5l37h" path="res://Assets/Sprites/Red Circle.png" id="1_cerst"]
+[ext_resource type="Script" uid="uid://3orb854pbagb" path="res://Scripts/SpinningWheel.cs" id="1_rjuen"]
+[ext_resource type="Texture2D" uid="uid://d0m07f3q7afoj" path="res://Assets/Sprites/Black Circle.png" id="2_7q6br"]
+[ext_resource type="Texture2D" uid="uid://bysyqrs0y8ro4" path="res://Assets/Sprites/Blue Circle.png" id="3_qi32l"]
+[ext_resource type="Texture2D" uid="uid://jqvxdcas5kx7" path="res://Assets/Sprites/Green Circle.png" id="4_t54l6"]
+[ext_resource type="Texture2D" uid="uid://bgbqost1dean0" path="res://Assets/Sprites/Yellow Circle.png" id="6_mnf4u"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1046750683]
+script = ExtResource("1_rjuen")
+_blackWheel = ExtResource("2_7q6br")
+_blueWheel = ExtResource("3_qi32l")
+_greenWheel = ExtResource("4_t54l6")
+_redWheel = ExtResource("1_cerst")
+_yellowWheel = ExtResource("6_mnf4u")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1569228237]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(128, 128)
+value = 25.0
+fill_mode = 4
+texture_progress = ExtResource("1_cerst")
