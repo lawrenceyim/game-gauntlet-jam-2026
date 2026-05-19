@@ -3,43 +3,20 @@ using Godot;
 using System.Collections.Generic;
 
 public partial class SpinningWheel : Node2D {
-	[Export]
-	private Texture2D _blackWheel;
-
-	[Export]
-	private Texture2D _blueWheel;
-
-	[Export]
-	private Texture2D _greenWheel;
-
-	[Export]
-	private Texture2D _redWheel;
-
-	[Export]
-	private Texture2D _yellowWheel;
+	private readonly List<TextureProgressBar> _bars = [];
 
 	private Node2D _wheelParent;
-
 	private Vector2I _wheelSize = new(300, 300);
-
-	private List<TextureProgressBar> _bars = [];
 	private RandomNumberGenerator _rng = new();
 	private bool _isSpinning = false;
 	private double _durationInSeconds = 4;
 	private double _secondsElapsed;
 	private float _targetRotation;
 	private List<ColorDto> _colorDtos; // Offset must be in ascending order
+	private int _numberOfSpins = 5;
 
 	public override void _Ready() {
-		_InitWheel([
-			new ColorDto(18.42f, 0f, _blackWheel, "Black"),
-			new ColorDto(27.15f, 18.42f, _blueWheel, "Blue"),
-			new ColorDto(11.73f, 45.57f, _greenWheel, "Green"),
-			new ColorDto(29.88f, 57.30f, _redWheel, "Red"),
-			new ColorDto(12.82f, 87.18f, _yellowWheel, "Yellow")
-		]);
 		_rng.Randomize();
-		_StartSpin();
 	}
 
 	public override void _Process(double delta) {
@@ -69,6 +46,24 @@ public partial class SpinningWheel : Node2D {
 		foreach (TextureProgressBar bar in _bars) {
 			bar.Rotation = Mathf.DegToRad(currentAngle);
 		}
+	}
+
+	public void Init(List<ColorDto> colorDtos) {
+		colorDtos.Sort((a, b) => a.Offset.CompareTo(b.Offset));
+		_InitWheel(colorDtos);
+	}
+
+
+	// Return true if spin started, false if already spinning
+	public bool StartSpin() {
+		if (_isSpinning) {
+			return false;
+		}
+
+		_targetRotation = 360 * _numberOfSpins + _rng.RandfRange(0f, 360f);
+		_secondsElapsed = 0;
+		_isSpinning = true;
+		return true;
 	}
 
 	private void _InitWheel(List<ColorDto> wheelSizes) {
@@ -101,16 +96,5 @@ public partial class SpinningWheel : Node2D {
 		return colors[^1];
 	}
 
-	private void _StartSpin() {
-		if (_isSpinning) {
-			return;
-		}
-
-		int spins = 5;
-		_targetRotation = 360 * spins + _rng.RandfRange(0f, 360f);
-		_secondsElapsed = 0;
-		_isSpinning = true;
-	}
-
-	private record ColorDto(float Percentage, float Offset, Texture2D Texture, string Description);
+	public record ColorDto(float Percentage, float Offset, Texture2D Texture, string Description);
 }

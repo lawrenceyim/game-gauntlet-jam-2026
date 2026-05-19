@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ds8jhquk3lubo"]
+
+[ext_resource type="Script" uid="uid://cc3goxtgakg3b" path="res://Scripts/GameWheelScene.cs" id="1_3w7yd"]
+[ext_resource type="Texture2D" uid="uid://d0m07f3q7afoj" path="res://Assets/Sprites/Black Circle.png" id="2_m6v81"]
+[ext_resource type="Texture2D" uid="uid://bysyqrs0y8ro4" path="res://Assets/Sprites/Blue Circle.png" id="3_3mlfe"]
+[ext_resource type="Texture2D" uid="uid://jqvxdcas5kx7" path="res://Assets/Sprites/Green Circle.png" id="4_w10wc"]
+[ext_resource type="Texture2D" uid="uid://cm207jvh5l37h" path="res://Assets/Sprites/Red Circle.png" id="5_p6hcu"]
+[ext_resource type="Texture2D" uid="uid://bgbqost1dean0" path="res://Assets/Sprites/Yellow Circle.png" id="6_o6mn5"]
+
+[node name="Node2D" type="Node2D" unique_id=1343846132]
+script = ExtResource("1_3w7yd")
+_blackWheel = ExtResource("2_m6v81")
+_blueWheel = ExtResource("3_3mlfe")
+_greenWheel = ExtResource("4_w10wc")
+_redWheel = ExtResource("5_p6hcu")
+_yellowWheel = ExtResource("6_o6mn5")
