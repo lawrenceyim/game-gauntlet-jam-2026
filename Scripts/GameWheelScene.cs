@@ -3,33 +3,30 @@ using Godot;
 
 public partial class GameWheelScene : Node {
     [Export]
-    private Texture2D _blackWheel;
+    private Texture2D _wheel1;
 
     [Export]
-    private Texture2D _blueWheel;
+    private Texture2D _wheel2;
 
     [Export]
-    private Texture2D _greenWheel;
+    private Texture2D _wheel3;
 
     [Export]
-    private Texture2D _redWheel;
-
-    [Export]
-    private Texture2D _yellowWheel;
+    private Texture2D _wheel4;
 
     public override void _Ready() {
         List<SpinningWheel.ColorDto> dtos = [
-            new SpinningWheel.ColorDto(
-                18.42f, 0f, _blackWheel, "Black"),
-            new SpinningWheel.ColorDto(27.15f, 18.42f, _blueWheel, "Blue"),
-            new SpinningWheel.ColorDto(11.73f, 45.57f, _greenWheel, "Green"),
-            new SpinningWheel.ColorDto(29.88f, 57.30f, _redWheel, "Red"),
-            new SpinningWheel.ColorDto(12.82f, 87.18f, _yellowWheel, "Yellow")
+            new(25f, 0f, _wheel1, "Wheel 1"),
+            new(25f, 25f, _wheel2, "Wheel 2"),
+            new(25f, 50f, _wheel3, "Wheel 3"),
+            new(25f, 75f, _wheel4, "Wheel 4")
         ];
 
-        SpinningWheel spinningWheel = new SpinningWheel();
+        SpinningWheel spinningWheel = new();
         AddChild(spinningWheel);
-        spinningWheel.Init(dtos);
+        spinningWheel.Position = new Vector2(0, 0);
+
+        spinningWheel.Init(dtos, new Vector2I(360, 360));
         spinningWheel.StartSpin();
     }
 }

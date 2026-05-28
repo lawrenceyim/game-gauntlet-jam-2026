@@ -6,7 +6,7 @@ public partial class SpinningWheel : Node2D {
 	private readonly List<TextureProgressBar> _bars = [];
 
 	private Node2D _wheelParent;
-	private Vector2I _wheelSize = new(300, 300);
+	private Vector2I _wheelSize;
 	private RandomNumberGenerator _rng = new();
 	private bool _isSpinning = false;
 	private double _durationInSeconds = 4;
@@ -48,7 +48,8 @@ public partial class SpinningWheel : Node2D {
 		}
 	}
 
-	public void Init(List<ColorDto> colorDtos) {
+	public void Init(List<ColorDto> colorDtos, Vector2I wheelSize) {
+		_wheelSize = wheelSize;
 		colorDtos.Sort((a, b) => a.Offset.CompareTo(b.Offset));
 		_InitWheel(colorDtos);
 	}
@@ -72,7 +73,7 @@ public partial class SpinningWheel : Node2D {
 		AddChild(_wheelParent);
 
 		foreach (ColorDto wheelSize in wheelSizes) {
-			TextureProgressBar bar = new TextureProgressBar();
+			TextureProgressBar bar = new();
 			_wheelParent.AddChild(bar);
 
 			bar.TextureProgress = wheelSize.Texture;
